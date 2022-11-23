@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function Registration() {
 
-    const URL = "http://localhost:5000/sing-up" 
+    const URL = "https://fit-market.onrender.com/sing-up" 
 
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function Registration() {
 
         const promise = axios.post(URL, obj);
         promise.then((res) => {
-            navigate("/");
+            navigate("/login");
         });
         promise.catch((err) => {
             setBlock(false);

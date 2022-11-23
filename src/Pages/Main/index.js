@@ -10,6 +10,19 @@ import exit from "../../Assets/Images/newExit.png"
 
 export default function Main() {
 
+    useEffect( () => {
+
+        const URL = "https://fit-market.onrender.com/products"
+
+        const promise = axios.get(URL);
+        promise.then((res) => {
+            console.log(res.data);
+        });
+        promise.catch((err) => {
+
+        });
+
+    })
 
     return (
         <>
