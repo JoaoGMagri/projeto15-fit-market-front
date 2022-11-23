@@ -12,8 +12,16 @@ export default function TopBar() {
 
     const [stateMenu, setStateMenu] = useState(false);
     const [stateUser, setStateUser] = useState(false);
+    const [imgUser, setImgUser] = useState(UserAnonimo);
+    const [nameUser, setNameUser] = useState("");
 
     const { token, URL_API } = useContext(AuthContext);
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
 
     useEffect( () => {
         if (token !== null) {
@@ -23,7 +31,16 @@ export default function TopBar() {
     }, []);
 
     function getInfo() {
-
+        const promise = axios.get(`${URL_API}/getUserInfo`, config);
+        promise.then( (res) => {
+            console.log(res.data);
+            setImgUser(res.data.img);
+            setNameUser(res.data.name);
+        });
+        promise.catch( (err) => {
+            alert(err);
+            window.location.reload();
+        })
     }
 
     function openMenu() {
@@ -36,13 +53,23 @@ export default function TopBar() {
 
     }
 
-    function logOut() {
+    function editImg() {
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
+        const newImg = prompt("Qual a nova URL ")
+
+        const promise = axios.put(`${URL_API}/editImg`, {img: newImg} , config);
+        promise.then( (res) => {
+            console.log(res.data);
+            getInfo();
+        });
+        promise.catch( (err) => {
+            alert(err);
+            window.location.reload();
+        })
+
+    }
+
+    function logOut() {
 
         const promise = axios.delete(`${URL_API}/go-out`, config);
         promise.then( (res) => {
@@ -66,16 +93,16 @@ export default function TopBar() {
                 {(stateUser) ? (
                     <>
                         <ImgUser
-                            src={UserAnonimo}
+                            src={imgUser}
                             alt="imagem do usuario"
                             onClick={openMenu}
                         />
 
                         <Menu status={stateMenu}>
                             <div>Nome do usuario</div>
-                            <div>João</div>
+                            <div>{nameUser}</div>
                             <div>Carrinho</div>
-                            <div>Editar imagem</div>
+                            <div onClick={editImg}>Editar imagem</div>
                             <div onClick={logOut}>Sair</div>
                         </Menu>
                     </>
@@ -111,7 +138,7 @@ const ContainerTopBar = styled.div`
 `
 const ImgUser = styled.img`
 width: 52px;
-height: 53px;
+height: 52px;
 border-radius: 100%;
 `
 const Menu = styled.div`
