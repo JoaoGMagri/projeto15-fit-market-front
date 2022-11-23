@@ -34,7 +34,9 @@ export default function TopBar() {
         const promise = axios.get(`${URL_API}/getUserInfo`, config);
         promise.then( (res) => {
             console.log(res.data);
-            setImgUser(res.data.img);
+            if(res.data.img){
+                setImgUser(res.data.img);
+            }
             setNameUser(res.data.name);
         });
         promise.catch( (err) => {
