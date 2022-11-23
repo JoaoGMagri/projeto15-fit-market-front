@@ -3,9 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { AuthContext } from "../../Contexts/auth"
-import imageExit from "../../Assets/Images/Exit.png"
-import entry from "../../Assets/Images/newEntry.png"
-import exit from "../../Assets/Images/newExit.png"
+
+import TopBar from "../Menus/Top-bar"
 
 export default function Main() {
 
@@ -24,12 +23,26 @@ export default function Main() {
     })
 
     return (
-        <>
-            Pagina principal
-            <Link to="/login">
-                Login
-            </Link>
-        </>
+        <ContainerMain>
+
+            <TopBar/>
+
+            <BodyMain>
+                estou aqui
+            </BodyMain>
+        
+        </ContainerMain>
     )
 
 }
+
+const ContainerMain = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: relative;
+`
+const BodyMain = styled.div`
+    margin-top: 80px;
+`

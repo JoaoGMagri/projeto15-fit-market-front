@@ -25,7 +25,6 @@ export default function Login() {
         const promise = axios.post(`${URL_API}/sing-in`, obj);
         promise.then((res) => {
             setToken(res.data);
-
             navigate("/");
         });
 
