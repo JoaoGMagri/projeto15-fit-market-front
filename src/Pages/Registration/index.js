@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { SoonName, Container, FormField, InputField, ButtonField, SpanField } from "../../Assets/Style/Login-Registration"
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
+import { AuthContext } from "../../Contexts/auth"
 
 export default function Registration() {
-
-    const URL = "https://fit-market.onrender.com/sing-up" 
-
+    
+    const { URL_API } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
@@ -27,7 +27,7 @@ export default function Registration() {
             repeat_password
         }
 
-        const promise = axios.post(URL, obj);
+        const promise = axios.post(`${URL_API}/sing-up`, obj);
         promise.then((res) => {
             navigate("/login");
         });

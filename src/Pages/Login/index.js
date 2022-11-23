@@ -8,8 +8,7 @@ import axios from "axios";
 export default function Login() {
 
     const navigate = useNavigate();
-    const URL = "https://fit-market.onrender.com/sing-in" 
-    const { setToken } = useContext(AuthContext);
+    const { setToken, URL_API } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,7 +22,7 @@ export default function Login() {
             password: password
         }
 
-        const promise = axios.post(URL, obj);
+        const promise = axios.post(`${URL_API}/sing-in`, obj);
         promise.then((res) => {
             setToken(res.data);
 
