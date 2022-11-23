@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 import UserAnonimo from "../../Assets/Images/userAnonimo.jpeg"
 import Enter from "../../Assets/Images/Enter.png"
@@ -35,6 +36,25 @@ export default function TopBar() {
 
     }
 
+    function logOut() {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const promise = axios.delete(`${URL_API}/go-out`, config);
+        promise.then( (res) => {
+            console.log(res.data);
+            window.location.reload();
+        });
+        promise.catch( (err) => {
+            alert(err.data.message);
+            window.location.reload();
+        })
+    }
+
     return (
 
         <ContainerTopBar>
@@ -56,7 +76,7 @@ export default function TopBar() {
                             <div>João</div>
                             <div>Carrinho</div>
                             <div>Editar imagem</div>
-                            <div>Sair</div>
+                            <div onClick={logOut}>Sair</div>
                         </Menu>
                     </>
                 ) : (
