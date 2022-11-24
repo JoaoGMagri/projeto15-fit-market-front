@@ -46,7 +46,7 @@ export default function Login() {
 
         <Container>
 
-            <SoonName>MyWallet</SoonName>
+            <SoonName>Fit Market</SoonName>
 
             <FormField onSubmit={submit}>
 

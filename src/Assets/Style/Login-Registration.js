@@ -19,7 +19,8 @@ export const SoonName = styled.h1`
     font-weight: 400;
     font-size: 35px;
     margin-bottom: 30px;
-    color: #eb0008;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
 
 `;
 
@@ -55,7 +56,7 @@ export const ButtonField = styled.button`
 
     width: 303px;
     height: 45px;
-    background: #e03e35;
+    background: #A0A0A0;
     border: 0px solid;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -75,6 +76,6 @@ export const SpanField = styled.span`
     font-weight: 700;
     font-size: 15px;
     text-decoration-line: underline;
-    color: #e03e35;
+    color: #A0A0A0;
 
 `;

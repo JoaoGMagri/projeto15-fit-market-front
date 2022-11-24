@@ -47,7 +47,7 @@ export default function Registration() {
     return (
         <Container>
 
-            <SoonName>MyWallet</SoonName>
+            <SoonName>Fit Market</SoonName>
 
             <FormField onSubmit={submit}>
 
