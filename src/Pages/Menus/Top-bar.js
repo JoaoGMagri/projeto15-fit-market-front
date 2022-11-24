@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import UserAnonimo from "../../Assets/Images/userAnonimo.jpeg"
@@ -23,21 +23,23 @@ export default function TopBar() {
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         if (token !== null) {
             setStateUser(true);
             getInfo();
         }
-    }, []);
+    }, [ ]);
 
     function getInfo() {
         const promise = axios.get(`${URL_API}/getUserInfo`, config);
-        promise.then( (res) => {
+        promise.then((res) => {
             console.log(res.data);
-            setImgUser(res.data.img);
+            if (res.data.img) {
+                setImgUser(res.data.img);
+            }
             setNameUser(res.data.name);
         });
-        promise.catch( (err) => {
+        promise.catch((err) => {
             alert(err);
             window.location.reload();
         })
@@ -57,12 +59,12 @@ export default function TopBar() {
 
         const newImg = prompt("Qual a nova URL ")
 
-        const promise = axios.put(`${URL_API}/editImg`, {img: newImg} , config);
-        promise.then( (res) => {
+        const promise = axios.put(`${URL_API}/editImg`, { img: newImg }, config);
+        promise.then((res) => {
             console.log(res.data);
             getInfo();
         });
-        promise.catch( (err) => {
+        promise.catch((err) => {
             alert(err);
             window.location.reload();
         })
@@ -72,11 +74,11 @@ export default function TopBar() {
     function logOut() {
 
         const promise = axios.delete(`${URL_API}/go-out`, config);
-        promise.then( (res) => {
+        promise.then((res) => {
             console.log(res.data);
             window.location.reload();
         });
-        promise.catch( (err) => {
+        promise.catch((err) => {
             alert(err.data.message);
             window.location.reload();
         })
@@ -85,9 +87,9 @@ export default function TopBar() {
     return (
 
         <ContainerTopBar>
-            <div>
+            <SoonName>
                 Fit Market
-            </div>
+            </SoonName>
 
             <div>
                 {(stateUser) ? (
@@ -99,8 +101,10 @@ export default function TopBar() {
                         />
 
                         <Menu status={stateMenu}>
-                            <div>Nome do usuario</div>
-                            <div>{nameUser}</div>
+                            <div>
+                                <div>Nome do usuario</div>
+                                {nameUser}
+                            </div>
                             <div>Carrinho</div>
                             <div onClick={editImg}>Editar imagem</div>
                             <div onClick={logOut}>Sair</div>
@@ -123,7 +127,7 @@ export default function TopBar() {
 const ContainerTopBar = styled.div`
     width: 100%;
     height: 70px;
-    background-color: red;
+    background-color: #A0A0A0;
     
     position: fixed;
     top: 0;
@@ -156,6 +160,7 @@ box-sizing: border-box;
 
 display: ${props => props.status ? "flex" : "none"};
 align-items: flex-start;
+justify-content: space-between;
 flex-direction: column;
 
 border: 1px solid #000000;
@@ -166,4 +171,12 @@ font-weight: 400;
 font-size: 12px;
 
 
+`
+const SoonName = styled.div`
+    font-family: 'Saira Stencil One', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
 `
