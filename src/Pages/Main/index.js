@@ -11,6 +11,7 @@ export default function Main() {
 
     const { URL_API } = useContext(AuthContext);
     const [products, setProducts] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -47,9 +48,9 @@ export default function Main() {
             <BodyMain>
                 <ul>
                     {products.map((product, index) =>
-                        <li key={index}>
-                            <img src={product.img}/>
-                            <h1>{product.name}</h1>
+                        <li key={index} onClick={() => navigate('/product', {state:product})}>
+                                <img src={product.img} alt={product.name} />
+                                <h1>{product.name}</h1>
                         </li>
                     )}
                 </ul>
@@ -62,27 +63,42 @@ export default function Main() {
 
 const ContainerMain = styled.div`
     display: flex;
-    align-items: center;
     justify-content: center;
-    
     position: relative;
 `
 const BodyMain = styled.div`
     margin-top: 80px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     ul{
         background-color: darkgray;
         height: 60vh;
         width: 90vw;
         display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
         li{
-            height: 100px;
-            width: 100px;
+            text-align: center;
+            height: 150px;
+            width: 150px;
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+            color: black;
         }
         img{
-        margin-top: 120px;
-        height: 80px;
-        width: 80px;
+            margin-top: 15px;
+        height: 150px;
+        width: 150px;
+        background-color: aliceblue;
+        border-radius: 10px;
+        transition: 0.25s;
+        }
+        img:hover{
+            filter: brightness(108%);
+            transform: scale(1.015);
+        }
     }
-    }
-    
 `
