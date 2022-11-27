@@ -33,7 +33,6 @@ export default function TopBar() {
     function getInfo() {
         const promise = axios.get(`${URL_API}/getUserInfo`, config);
         promise.then((res) => {
-            console.log(res.data);
             if (res.data.img) {
                 setImgUser(res.data.img);
             }
@@ -61,7 +60,6 @@ export default function TopBar() {
 
         const promise = axios.put(`${URL_API}/editImg`, { img: newImg }, config);
         promise.then((res) => {
-            console.log(res.data);
             getInfo();
         });
         promise.catch((err) => {
@@ -75,7 +73,6 @@ export default function TopBar() {
 
         const promise = axios.delete(`${URL_API}/go-out`, config);
         promise.then((res) => {
-            console.log(res.data);
             window.location.reload();
         });
         promise.catch((err) => {

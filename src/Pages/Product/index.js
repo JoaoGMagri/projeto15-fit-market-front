@@ -32,7 +32,7 @@ export default function Product() {
             promise.catch((err) => {
                 console.log(err);
             });
-            console.log("Foi!!")
+            navigate("/cart")
         }
 
     }
@@ -80,6 +80,11 @@ export default function Product() {
                         <p>Cálcio:
                             <span>
                                 {product.Tabela_Nutri.calcio}
+                            </span>
+                        </p>
+                        <p>Preço:
+                            <span>
+                                {product.preco}
                             </span>
                         </p>
                     </table>

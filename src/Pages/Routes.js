@@ -4,6 +4,7 @@ import Login from "./Login/index"
 import Registration from "./Registration/index"
 import Main from "./Main/index"
 import Product from './Product/index'
+import Cart from './Cart/index'
 
 export default function RoutesFun(){
 
@@ -13,6 +14,7 @@ export default function RoutesFun(){
             <Route path="/product" element={<Product />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
+            <Route path="/cart" element={<Cart />} />
 
         </Routes>
     )
