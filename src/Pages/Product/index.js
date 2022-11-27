@@ -12,17 +12,31 @@ export default function Product() {
     const navigate = useNavigate();
     console.log(product);
 
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
     function addCrats() {
 
-        if(!token){
+        if (!token) {
             alert("Você precisa logar para montar um carrinho");
             navigate("/login");
         } else {
+
+            const promise = axios.post(`${URL_API}/cartspost`, product , config);
+            promise.then((res) => {
+                console.log(res.data);
+            });
+            promise.catch((err) => {
+                console.log(err);
+            });
             console.log("Foi!!")
         }
 
     }
-    
+
 
     return (
         <ContainerMain>
