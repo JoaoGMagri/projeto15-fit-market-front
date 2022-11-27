@@ -6,11 +6,23 @@ import { AuthContext } from "../../Contexts/auth"
 
 import TopBar from "../Menus/Top-bar"
 
-
 export default function Product() {
-    const { URL_API } = useContext(AuthContext);
+    const { URL_API, token } = useContext(AuthContext);
     const product = useLocation().state;
+    const navigate = useNavigate();
     console.log(product);
+
+    function addCrats() {
+
+        if(!token){
+            alert("Você precisa logar para montar um carrinho");
+            navigate("/login");
+        } else {
+            console.log("Foi!!")
+        }
+
+    }
+    
 
     return (
         <ContainerMain>
@@ -57,7 +69,7 @@ export default function Product() {
                             </span>
                         </p>
                     </table>
-                    <button>Adicionar ao carrinho</button>
+                    <button onClick={addCrats}>Adicionar ao carrinho</button>
                 </div>
             </BodyMain>
 
