@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../Contexts/auth"
 
 import TopBar from "../Menus/Top-bar"
+import SideBar from "../Menus/Side-bar"
 
 export default function Product() {
     const { URL_API, token } = useContext(AuthContext);
@@ -28,11 +29,11 @@ export default function Product() {
             const promise = axios.post(`${URL_API}/cartspost`, product , config);
             promise.then((res) => {
                 console.log(res.data);
+                navigate("/cart");
             });
             promise.catch((err) => {
                 console.log(err);
             });
-            navigate("/cart")
         }
 
     }
@@ -91,6 +92,8 @@ export default function Product() {
                     <button onClick={addCrats}>Adicionar ao carrinho</button>
                 </div>
             </BodyMain>
+
+            <SideBar />
 
         </ContainerMain>
     )

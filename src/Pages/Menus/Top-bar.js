@@ -28,7 +28,7 @@ export default function TopBar() {
             setStateUser(true);
             getInfo();
         }
-    }, [ ]);
+    }, []);
 
     function getInfo() {
         const promise = axios.get(`${URL_API}/getUserInfo`, config);
@@ -84,9 +84,12 @@ export default function TopBar() {
     return (
 
         <ContainerTopBar>
-            <SoonName>
-                Fit Market
-            </SoonName>
+
+            <Link to="/">
+                <SoonName>
+                    Fit Market
+                </SoonName>
+            </Link>
 
             <div>
                 {(stateUser) ? (
@@ -102,7 +105,6 @@ export default function TopBar() {
                                 <div>Nome do usuario</div>
                                 {nameUser}
                             </div>
-                            <div>Carrinho</div>
                             <div onClick={editImg}>Editar imagem</div>
                             <div onClick={logOut}>Sair</div>
                         </Menu>
