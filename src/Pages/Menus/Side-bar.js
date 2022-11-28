@@ -57,7 +57,7 @@ export default function SideBar() {
             
             <ContainerTopBar status={status}>
 
-                <img src={Carts} alt="" />
+                <img src={Carts} alt="carrinho" />
 
                 <div> Seu Carrinho </div>
 
