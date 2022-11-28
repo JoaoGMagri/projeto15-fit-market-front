@@ -39,7 +39,7 @@ export default function Cart() {
                 console.log(err.data);
             })
 
-        } else{
+        } else {
             navigate("/");
         }
 
@@ -92,7 +92,7 @@ export default function Cart() {
                         return (
                             <Products key={i}>
                                 <div>
-                                    <ImgProducts src={item.img} alt="oi" />
+                                    <ImgProducts src={item.img} alt={item.name} />
 
                                     <Description>
                                         <div> {item.name} </div>
@@ -100,16 +100,19 @@ export default function Cart() {
                                     </Description>
                                 </div>
 
-                                <img src={Remove} alt="" onClick={() => deleteCart(item._id)} />
+                                <img src={Remove} alt="Remover do carrinho" onClick={() => deleteCart(item._id)} />
                             </Products>
                         )
                     })}
+
                 </ProductsList>
 
                 <SideBarCarts>
                     Total: R${totalCarts}
-
-                    <button>Finalizar pedido</button>
+                    <div>
+                        <button onClick={() => navigate('/')}>Continuar comprando</button>
+                        <button onClick={() => navigate('/finish', arrItens)}>Finalizar pedido</button>
+                    </div>
                 </SideBarCarts>
             </BodyCart>
 
@@ -152,6 +155,9 @@ const Products = styled.div`
     div{
         display: flex;
     }
+    >img{
+        cursor: pointer;
+    }
 `
 const ImgProducts = styled.img`
     width: 100px;
@@ -183,7 +189,7 @@ const SideBarCarts = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px;
+    padding: 10px;
     box-sizing: border-box;
 
     font-family: Arial, Helvetica, sans-serif;
@@ -192,10 +198,14 @@ const SideBarCarts = styled.div`
     font-size: 24px;
 
     background: #A0A0A0;
+    div{
+        display: flex;
+        flex-direction: column;
+    }
 
     button{
-        width: 153px;
-        height: 37px;
+        width: 160px;
+        height: 35px;
         background: #D9D9D9;
         border: 1px solid #000000;
         border-radius: 5px;
@@ -203,7 +213,11 @@ const SideBarCarts = styled.div`
         font-family: Arial, Helvetica, sans-serif;
         font-style: normal;
         font-weight: 400;
-        font-size: 18px;
-
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+    button:hover{
+        filter: brightness(120%);
     }
 `

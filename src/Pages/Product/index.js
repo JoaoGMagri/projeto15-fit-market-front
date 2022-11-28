@@ -19,7 +19,7 @@ export default function Product() {
         }
     }
 
-    function addCrats() {
+    function addCarts() {
 
         if (!token) {
             alert("Você precisa logar para montar um carrinho");
@@ -49,10 +49,10 @@ export default function Product() {
                     <img src={product.img} />
                     <h1>{product.name}</h1>
                     <table>
-                        <tr>
-                            <th>Informações Nutricionais</th>
-                            <th>Porção</th>
-                        </tr>
+                        <trow>
+                            <thead>Informações Nutricionais</thead>
+                            <thead>Porção</thead>
+                        </trow>
                         <p>Valor Energético:
                             <span>
                                 {product.Tabela_Nutri.valorEnergetico}
@@ -89,7 +89,7 @@ export default function Product() {
                             </span>
                         </p>
                     </table>
-                    <button onClick={addCrats}>Adicionar ao carrinho</button>
+                    <button onClick={addCarts}>Adicionar ao carrinho</button>
                 </div>
             </BodyMain>
 
@@ -118,8 +118,8 @@ const BodyMain = styled.div`
         width: 90vw;
         background-color: white;
         img{
-            height: 40vh;
-            width: 80vw;
+            height: 250px;
+            width: 250px;
         }
         h1{
             font-size: 22px;
@@ -137,6 +137,10 @@ const BodyMain = styled.div`
         }
         button:hover{
             transform: scale(1.02);
+        }
+        tr{
+            background-color: magenta;
+            border: 1px solid;
         }
     }
 `

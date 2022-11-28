@@ -56,17 +56,22 @@ export default function TopBar() {
 
     function editImg() {
 
-        const newImg = prompt("Qual a nova URL ")
+        const newImg = prompt("Qual a nova URL da imagem ");
 
-        const promise = axios.put(`${URL_API}/editImg`, { img: newImg }, config);
-        promise.then((res) => {
-            getInfo();
-        });
-        promise.catch((err) => {
-            alert(err);
-            window.location.reload();
-        })
-
+        try {
+            let testURL = new URL(newImg);
+            const promise = axios.put(`${URL_API}/editImg`, { img: newImg }, config);
+            promise.then((res) => {
+                getInfo();
+            });
+            promise.catch((err) => {
+                alert(err);
+                window.location.reload();
+            })
+        } catch (error) {
+            console.log('URL inválida');
+            alert('URL inválida');
+        }
     }
 
     function logOut() {
@@ -143,6 +148,7 @@ const ImgUser = styled.img`
 width: 52px;
 height: 52px;
 border-radius: 100%;
+cursor: pointer;
 `
 const Menu = styled.div`
 
@@ -168,7 +174,9 @@ border-radius: 10px;
 
 font-weight: 400;
 font-size: 12px;
-
+    div:nth-child(2), div:nth-child(3){
+        cursor: pointer;
+    }
 
 `
 const SoonName = styled.div`
