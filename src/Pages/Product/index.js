@@ -5,12 +5,39 @@ import axios from "axios";
 import { AuthContext } from "../../Contexts/auth"
 
 import TopBar from "../Menus/Top-bar"
-
+import SideBar from "../Menus/Side-bar"
 
 export default function Product() {
-    const { URL_API } = useContext(AuthContext);
+    const { URL_API, token } = useContext(AuthContext);
     const product = useLocation().state;
+    const navigate = useNavigate();
     console.log(product);
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    function addCrats() {
+
+        if (!token) {
+            alert("Você precisa logar para montar um carrinho");
+            navigate("/login");
+        } else {
+
+            const promise = axios.post(`${URL_API}/cartspost`, product , config);
+            promise.then((res) => {
+                console.log(res.data);
+                navigate("/cart");
+            });
+            promise.catch((err) => {
+                console.log(err);
+            });
+        }
+
+    }
+
 
     return (
         <ContainerMain>
@@ -56,10 +83,17 @@ export default function Product() {
                                 {product.Tabela_Nutri.calcio}
                             </span>
                         </p>
+                        <p>Preço:
+                            <span>
+                                {product.preco}
+                            </span>
+                        </p>
                     </table>
-                    <button>Adicionar ao carrinho</button>
+                    <button onClick={addCrats}>Adicionar ao carrinho</button>
                 </div>
             </BodyMain>
+
+            <SideBar />
 
         </ContainerMain>
     )

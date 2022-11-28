@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../Contexts/auth"
 
 import TopBar from "../Menus/Top-bar"
+import SideBar from "../Menus/Side-bar"
 import Loader from "../../Assets/Style/Loader";
 
 export default function Main() {
@@ -36,6 +37,8 @@ export default function Main() {
                     <Loader/>
                 </BodyMain>
 
+                <SideBar />
+
             </ContainerMain>
         )
     
@@ -55,6 +58,8 @@ export default function Main() {
                     )}
                 </ul>
             </BodyMain>
+
+            <SideBar />
         
         </ContainerMain>
     )

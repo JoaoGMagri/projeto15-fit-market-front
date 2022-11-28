@@ -28,12 +28,11 @@ export default function TopBar() {
             setStateUser(true);
             getInfo();
         }
-    }, [ ]);
+    }, []);
 
     function getInfo() {
         const promise = axios.get(`${URL_API}/getUserInfo`, config);
         promise.then((res) => {
-            console.log(res.data);
             if (res.data.img) {
                 setImgUser(res.data.img);
             }
@@ -61,7 +60,6 @@ export default function TopBar() {
 
         const promise = axios.put(`${URL_API}/editImg`, { img: newImg }, config);
         promise.then((res) => {
-            console.log(res.data);
             getInfo();
         });
         promise.catch((err) => {
@@ -75,7 +73,6 @@ export default function TopBar() {
 
         const promise = axios.delete(`${URL_API}/go-out`, config);
         promise.then((res) => {
-            console.log(res.data);
             window.location.reload();
         });
         promise.catch((err) => {
@@ -87,9 +84,12 @@ export default function TopBar() {
     return (
 
         <ContainerTopBar>
-            <SoonName>
-                Fit Market
-            </SoonName>
+
+            <Link to="/">
+                <SoonName>
+                    Fit Market
+                </SoonName>
+            </Link>
 
             <div>
                 {(stateUser) ? (
@@ -105,7 +105,6 @@ export default function TopBar() {
                                 <div>Nome do usuario</div>
                                 {nameUser}
                             </div>
-                            <div>Carrinho</div>
                             <div onClick={editImg}>Editar imagem</div>
                             <div onClick={logOut}>Sair</div>
                         </Menu>
